@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=drink
+comment0.text=\r\n\ This\ creates\ the\ drink\ application.\r\n\r\n\ @author\ Evan\ Vicidomini\r\n\ @version\ May\ 23,\ 2019\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=drink()
+comment2.text=\r\n\ This\ is\ the\ main\ constructor\ for\ the\ drink\ program.\ Creates\ the\ main\ frame.\r\n
+comment3.params=
+comment3.target=void\ moneyInput()
+comment3.text=\r\n\ This\ begins\ the\ progam\ by\ using\ the\ import\ JOptionPane\ class.\r\n
+numComments=4
