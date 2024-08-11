@@ -2,11 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.text.DecimalFormat;
+
 /**
  * This creates the drink application.
  *
  * @author Evan Vicidomini
  * @version May 23, 2019
+ * Last Updated: August 11, 2024
  */
 public class drink extends JFrame
 {   
@@ -17,7 +19,7 @@ public class drink extends JFrame
     private int drinkCount = 0; //The amount of drinks bought
     private JCheckBox[] cb1 = new JCheckBox[5]; //Check boxes for sodas.
     private JCheckBox[] cb2 = new JCheckBox[5]; //Check boxes for other drinks.
-    private Color c1 = new Color(206, 225, 255); //Very Light Blue
+    private Color c1 = new Color(182, 199, 236); //Very Light Blue
     private Color c2 = new Color(63, 86, 122); //Very Dark Blue
     
     public static void main(String[] args)
@@ -96,15 +98,15 @@ public class drink extends JFrame
         l3.setForeground(c2);
         
         //Creates all 5 soda names, checkboxes, and images.
-        JLabel pic1 = new JLabel(new ImageIcon("DrinkImages/Coke.png"));
+        JLabel pic1 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/Coke.png"));
         cb1[0] = new JCheckBox("Coca Cola");
-        JLabel pic2 = new JLabel(new ImageIcon("DrinkImages/Pepsi.jpg"));
+        JLabel pic2 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/Pepsi.jpg"));
         cb1[1] = new JCheckBox("Pepsi Cola");
-        JLabel pic3 = new JLabel(new ImageIcon("DrinkImages/MountainDew.png"));
+        JLabel pic3 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/MountainDew.png"));
         cb1[2] = new JCheckBox("Mountain Dew");
-        JLabel pic4 = new JLabel(new ImageIcon("DrinkImages/DrPepper.png"));
+        JLabel pic4 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/DrPepper.png"));
         cb1[3] = new JCheckBox("Dr. Pepper");
-        JLabel pic5 = new JLabel(new ImageIcon("DrinkImages/RootBeer.png"));
+        JLabel pic5 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/RootBeer.png"));
         cb1[4] = new JCheckBox("Barq's Root Beer");
         
         //Adds the items to panel 2.
@@ -133,15 +135,15 @@ public class drink extends JFrame
         l4.setForeground(c2);
         
         //Creates all 5 drink names, checkboxes, and images.
-        JLabel pic6 = new JLabel(new ImageIcon("DrinkImages/Gatorade.jpeg"));
+        JLabel pic6 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/Gatorade.jpeg"));
         cb2[0] = new JCheckBox("Gatorade");
-        JLabel pic7 = new JLabel(new ImageIcon("DrinkImages/Lemonade.jpg"));
+        JLabel pic7 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/Lemonade.jpg"));
         cb2[1] = new JCheckBox("Lemonade");
-        JLabel pic8 = new JLabel(new ImageIcon("DrinkImages/Water.jpg"));
+        JLabel pic8 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/Water.jpg"));
         cb2[2] = new JCheckBox("Water");
-        JLabel pic9 = new JLabel(new ImageIcon("DrinkImages/FruitPunch.jpg"));
+        JLabel pic9 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/FruitPunch.jpg"));
         cb2[3] = new JCheckBox("Fruit Punch");
-        JLabel pic10 = new JLabel(new ImageIcon("DrinkImages/IceTea.png"));
+        JLabel pic10 = new JLabel(new ImageIcon("Java/Drink/DrinkImages/IceTea.png"));
         cb2[4] = new JCheckBox("Ice Tea");
         
         //Adds the items to panel 3.
@@ -162,31 +164,26 @@ public class drink extends JFrame
         
         //Makes the main frame visible after everything is added.
         f1.setVisible(true);
-    } 
-    
+    }
+
     /**
-     * This begins the progam by using the import JOptionPane class.
+     * This asks the user to type a number greater than 0 to buy drinks. The value must also not be a string.
      */
-    public void moneyInput()
-    {
-        //Asks the user for the money they have.
-        usCur = JOptionPane.showInputDialog(null, "Type the amount of money you have.");
-                  
-        //Changes the string to a double.
-        userCurrency = Double.parseDouble(usCur);
-        
-        //Loop created to see if the number is greater than 0.
-        while(userCurrency <= 0.0)
-        {
-            JOptionPane.showMessageDialog(null, "ERROR! You must type a number greater than 0.");
-            
-            usCur = JOptionPane.showInputDialog(null, "Type the amount of money you have.");
-            
-            userCurrency = Double.parseDouble(usCur);
+    public void moneyInput() {
+        while(userCurrency <= 0){
+            try {
+                usCur = JOptionPane.showInputDialog(null, "Type the amount of money you have.");
+                userCurrency = Double.parseDouble(usCur);
+                if (userCurrency <= 0) {
+                    JOptionPane.showMessageDialog(null, "You must type a number greater than 0.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your total cash is $" + userCurrency + ". You will only be able to buy drinks until the cash runs out.");
+                }
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(null, "You must type a number greater than 0.");
+            }
         }
-        
-        //Displays the results when a valid number is typed.
-        JOptionPane.showMessageDialog(null, "Your total cash is $" + userCurrency + ". You will only be able to buy drinks until the cash runs out.");        
     }
     
     public class exit implements ActionListener
@@ -194,13 +191,11 @@ public class drink extends JFrame
         /**
          * This confirms if the user wants to exit the program.
          * 
-         * @param e  The action event used for the button.
+         * @param e The action event used for the button.
          */
         public void actionPerformed(ActionEvent e)
         {
-            //Confirms if the user wants to exit.
             int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit Pane",JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-            
             if(input == JOptionPane.YES_OPTION)
             {
                 JOptionPane.showMessageDialog(null,"Total drinks bought: " + drinkCount);
@@ -218,44 +213,31 @@ public class drink extends JFrame
          */
         public void actionPerformed(ActionEvent e)
         {
-            //Create decimal format for the numbers to be displayed.
             DecimalFormat df = new DecimalFormat("#,###,##0.00");
-            
-            //Loops the checkbox array cb1.
-            for(int i = 0; i < cb1.length; i++)
-            {
-                if(cb1[i].isSelected())
-                {
+            for(int i = 0; i < cb1.length; i++) {
+                if(cb1[i].isSelected()) {
                     totalCost += 1.05;
                     drinkCount += 1;
                 }
             }
             
-            //Loops the checkbox array cb2.
-            for(int i = 0; i < cb2.length; i++)
-            {
-                if(cb2[i].isSelected())
-                {
+            for(int i = 0; i < cb2.length; i++) {
+                if(cb2[i].isSelected()) {
                     totalCost += 1.00;
                     drinkCount += 1;
                 }
             }
             
             JOptionPane.showMessageDialog(null, "Total: " + df.format(totalCost), "Confirmation", JOptionPane.OK_OPTION);
-            
             userCurrency -= totalCost;
-            
             JOptionPane.showMessageDialog(null,"Money left: " + userCurrency);
             
-            //Checks is currency is greater than 0.
-            if(userCurrency == 0)
-            {
+            if(userCurrency == 0) {
                 JOptionPane.showMessageDialog(null,"You have no more money. Thanks for shopping.");
                 JOptionPane.showMessageDialog(null,"Total drinks bought: " + drinkCount);
                 System.exit(0);
             }
-            else if(userCurrency < 0)
-            {
+            else if(userCurrency < 0) {
                 JOptionPane.showMessageDialog(null,"You have insufficient funds. Thanks for shopping.");
                 drinkCount -= 1;
                 JOptionPane.showMessageDialog(null,"Total drinks bought: " + drinkCount);
