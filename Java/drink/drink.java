@@ -21,6 +21,7 @@ public class drink extends JFrame
     private JCheckBox[] cb2 = new JCheckBox[5]; //Check boxes for other drinks.
     private Color c1 = new Color(182, 199, 236); //Very Light Blue
     private Color c2 = new Color(63, 86, 122); //Very Dark Blue
+    DecimalFormat df = new DecimalFormat("0.00");
     
     public static void main(String[] args)
     {
@@ -177,7 +178,7 @@ public class drink extends JFrame
                 if (userCurrency <= 0) {
                     JOptionPane.showMessageDialog(null, "You must type a number greater than 0.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your total cash is $" + userCurrency + ". You will only be able to buy drinks until the cash runs out.");
+                    JOptionPane.showMessageDialog(null, "Your total cash is $" + df.format(userCurrency) + ". You will only be able to buy drinks until the cash runs out.");
                 }
             }
             catch (Exception e){
@@ -230,7 +231,7 @@ public class drink extends JFrame
             
             JOptionPane.showMessageDialog(null, "Total: " + df.format(totalCost), "Confirmation", JOptionPane.OK_OPTION);
             userCurrency -= totalCost;
-            JOptionPane.showMessageDialog(null,"Money left: " + userCurrency);
+            JOptionPane.showMessageDialog(null,"Money left: " + df.format(userCurrency));
             
             if(userCurrency == 0) {
                 JOptionPane.showMessageDialog(null,"You have no more money. Thanks for shopping.");
